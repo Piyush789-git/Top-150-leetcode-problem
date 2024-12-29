@@ -1,0 +1,23 @@
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+       
+        nums1.resize(m);
+
+      nums1.insert(nums1.end(),nums2.begin(),nums2.end());
+
+     /* for(int i=1;i<=k;i++){
+      int mini=i;
+        for(int j=i;j<=k;j++){
+       if(nums1[j]<nums1[mini]){
+        mini=j;
+
+       }
+        }
+        int temp=nums1[mini];
+        nums1[mini]=nums1[i];
+        nums1[i]=temp;
+      }*/
+      sort(nums1.begin(),nums1.end());
+    }
+};
