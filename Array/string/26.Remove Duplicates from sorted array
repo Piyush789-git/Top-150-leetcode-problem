@@ -1,0 +1,35 @@
+/*class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int i=0;
+        
+        while( i< nums.size()){
+            for(int j=i+1;j<nums.size();j++){
+                if(nums[j]==nums[i]){
+                     nums.erase(nums.begin() + j); 
+                     j--;
+                    
+                }
+                
+            }
+            i++;
+            
+        }
+        return nums.size();
+    }
+};*//OWN ANS
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int j = 1;
+        for(int i = 1; i < nums.size(); i++){
+            if(nums[i] != nums[i - 1]){
+                nums[j] = nums[i];
+                j++;
+            }
+        }
+        return j;
+    }
+};
+//BOTH ANS PASSES THE TEST CASE BUT IST ANS T.C =O(N^2) AND 2ND ANS T.C = O(N)
+//2ND ANS IS MORE OPTIMISED
