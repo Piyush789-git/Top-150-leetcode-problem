@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int hIndex(vector<int>& citations) {
+        
+     sort(citations.begin(),citations.end());
+     
+        int n= citations.size();
+        for (int i = 0; i < n; i++) {
+            int h = n - i; // Number of papers with at least `h` citations.
+            if (citations[i] >= h) {
+                return h; // Return the first valid H-Index.
+            }
+        }
+        
+        return 0; // If no valid H-Index is found, return 0.
+    }
+};
