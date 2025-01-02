@@ -1,0 +1,61 @@
+class Solution {
+public:
+    int romanToInt(string s) {
+      unordered_map<char,int>mpp{
+        {'I',1},{'V',5},{'X',10},{'L',50},{'C',100},{'D',500},{'M',1000}};
+int total=0;
+int n=s.size();
+for(int i=0;i<n;i++){
+        if(i< n-1 && mpp[s[i]] < mpp[s[i+1]]){
+total-=mpp[s[i]];
+        }
+        else total+=mpp[s[i]];
+        }
+      return total; 
+    }
+};
+//Example Walkthrough:
+Input: MCMXCIV (1994)
+M (1000):
+
+i < n - 1 is true.
+romanMap['M'] >= romanMap['C'] is true.
+Add 
+1000
+1000: total = 1000.
+C (100):
+
+romanMap['C'] < romanMap['M'] is true.
+Subtract 
+100
+100: total = 900.
+M (1000):
+
+romanMap['M'] >= romanMap['X'] is true.
+Add 
+1000
+1000: total = 1900.
+X (10):
+
+romanMap['X'] < romanMap['C'] is true.
+Subtract 
+10
+10: total = 1890.
+C (100):
+
+romanMap['C'] >= romanMap['I'] is true.
+Add 
+100
+100: total = 1990.
+I (1):
+
+romanMap['I'] < romanMap['V'] is true.
+Subtract 
+1
+1: total = 1989.
+V (5):
+
+Add 
+5
+5: total = 1994.
+Final Output: 1994
