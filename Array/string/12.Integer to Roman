@@ -1,0 +1,80 @@
+//Given an integer, convert it to a Roman numeral.
+class Solution {
+public:
+    string intToRoman(int num) {
+        vector<pair<int,string>>romanmap ={
+            {1000,"M"},{900,"CM"},{500,"D"},{400,"CD"},{100,"C"},{90,"XC"},{50,"L"},{40,"XL"},{10,"X"},{9,"IX"},{5,"V"},{4,"IV"},{1,"I"} 
+    };
+        string result="";
+        for(const auto&[value,symbol]:romanmap){
+            while(num>=value){
+                result+=symbol;
+                num-=value;
+            }
+        }
+        return result;
+    }
+};
+//1. First Iteration
+Current value = 1000, symbol = "M".
+Check: 1987 >= 1000. True.
+Subtract: num -= 1000 → num = 987.
+Append: result = "M".
+2. Second Iteration
+Current value = 900, symbol = "CM".
+Check: 987 >= 900. True.
+Subtract: num -= 900 → num = 87.
+Append: result = "MCM".
+3. Third Iteration
+Current value = 500, symbol = "D".
+Check: 87 >= 500. False. Move to the next value.
+4. Fourth Iteration
+Current value = 400, symbol = "CD".
+Check: 87 >= 400. False. Move to the next value.
+5. Fifth Iteration
+Current value = 100, symbol = "C".
+Check: 87 >= 100. False. Move to the next value.
+6. Sixth Iteration
+Current value = 90, symbol = "XC".
+Check: 87 >= 90. False. Move to the next value.
+7. Seventh Iteration
+Current value = 50, symbol = "L".
+Check: 87 >= 50. True.
+Subtract: num -= 50 → num = 37.
+Append: result = "MCML".
+8. Eighth Iteration
+Current value = 40, symbol = "XL".
+Check: 37 >= 40. False. Move to the next value.
+9. Ninth Iteration
+Current value = 10, symbol = "X".
+
+Check: 37 >= 10. True.
+
+Subtract: num -= 10 → num = 27.
+
+Append: result = "MCMLX".
+
+Repeat for num = 27:
+
+Subtract: num -= 10 → num = 17, Append: result = "MCMLXX".
+Subtract: num -= 10 → num = 7, Append: result = "MCMLXXX".
+10. Tenth Iteration
+Current value = 9, symbol = "IX".
+Check: 7 >= 9. False. Move to the next value.
+11. Eleventh Iteration
+Current value = 5, symbol = "V".
+Check: 7 >= 5. True.
+Subtract: num -= 5 → num = 2.
+Append: result = "MCMLXXXV".
+12. Twelfth Iteration
+Current value = 4, symbol = "IV".
+Check: 2 >= 4. False. Move to the next value.
+13. Thirteenth Iteration
+Current value = 1, symbol = "I".
+Check: 2 >= 1. True.
+Subtract: num -= 1 → num = 1.
+Append: result = "MCMLXXXVI".
+Subtract: num -= 1 → num = 0.
+Append: result = "MCMLXXXVII".
+Final Output
+result = "MCMLXXXVII"
