@@ -1,0 +1,42 @@
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        if(numRows==1 || numRows >=s.size()){
+            return s;
+        }
+        vector<string>rows(min(numRows,static_cast<int>(s.size())));
+   int currentRow=0;
+   bool goingdown=false;
+   //traverse string
+        for(char c:s){
+       rows[currentRow]+=c;
+     // Change direction if we reach the top or bottom row
+        if (currentRow == 0 || currentRow == numRows - 1) {
+            goingdown=!goingdown;
+        }
+        currentRow+=goingdown?1:-1;
+        }
+        string result;
+        for(const string&row :rows){
+            result+=row;
+        }
+        return result;
+
+    }
+};
+//C-CHARACTER,R-CURRENTROW
+C   R   RowState	Going Down?	New Row
+'P'	0	["P", "", ""]	 true 	1
+'A'	1	["P", "A", ""]	true	2
+'Y'	2	["P", "A", "Y"]	false	1
+'P'	1	["P", "AP", "Y"]	false	0
+'A'	0	["PA", "AP", "Y"]	true	1
+'L'	1	["PA", "APL", "Y"]	true	2
+'I'	2	["PA", "APL", "YI"]	false	1
+'S'	1	["PA", "APLS", "YI"]	false	0
+'H'	0	["PAH", "APLS", "YI"]	true	1
+'I'	1	["PAH", "APLSI", "YI"]	true	2
+'R'	2	["PAH", "APLSI", "YIR"]	false	1
+'I'	1	["PAH", "APLSII", "YIR"]	false	0
+'N'	0	["PAHN", "APLSII", "YIR"]	true	1
+'G'	1	["PAHN", "APLSIIG", "YIR"]	true	2
