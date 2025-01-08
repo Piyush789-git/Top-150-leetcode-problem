@@ -1,0 +1,46 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        if (t.empty() || s.empty()) {
+            return "";
+        }
+        unordered_map<char, int> tmap;
+        for (char c : t) {
+            tmap[c]++;
+        }
+
+        int required = tmap.size(); // required size
+        int left = 0, right = 0; // Two pointers for sliding window
+        int formed = 0; // how many char req for current window
+
+        unordered_map<char, int> windowmap;
+        int minlen = INT_MAX;
+        int start = 0;
+
+        while (right < s.size()) {
+            char c = s[right];
+            windowmap[c]++;
+
+            if (tmap.count(c) && windowmap[c] == tmap[c]) {
+                formed++;
+            }
+            //shrink window size
+            while (left <= right && formed == required) {
+                c = s[left];
+            //update window size
+                if (right - left + 1 < minlen) {
+                    minlen = right - left + 1;
+                    start = left;
+                }
+                windowmap[c]--;
+                if (tmap.count(c) && windowmap[c] < tmap[c]) {
+                    formed--;
+                }
+                left++;
+            }
+            //expand
+            right++;
+        }
+        return minlen == INT_MAX ? "" : s.substr(start, minlen);
+    }
+};
