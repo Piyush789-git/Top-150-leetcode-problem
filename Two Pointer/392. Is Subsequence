@@ -1,0 +1,24 @@
+class Solution {
+public:
+    // Helper function for recursion
+    bool subsequenceHelper(string s, string t, int n, int m) {
+        if (n == 0) return true;  // All characters in `s` are matched
+        if (m == 0) return false; // `t` is exhausted but `s` is not
+
+        if (s[n - 1] == t[m - 1]) {
+            // Include the current character
+            return subsequenceHelper(s, t, n - 1, m - 1);
+        }
+
+        // Exclude the current character of `t`
+        return subsequenceHelper(s, t, n, m-1);
+    }
+
+    // Main function
+    bool isSubsequence(string s, string t) {
+        int n = s.size();
+        int m = t.size();
+
+        return subsequenceHelper(s, t, n, m);
+    }
+};
