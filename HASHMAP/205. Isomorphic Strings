@@ -1,0 +1,30 @@
+class Solution {
+public:
+bool isIsomorphic(string s, string t) {
+    if (s.size() != t.size()) return false; // Strings of different lengths cannot be isomorphic
+
+    unordered_map<char, char> mapST; // Map from s to t
+    unordered_map<char, char> mapTS; // Map from t to s
+
+    for (int i = 0; i < s.size(); i++) {
+        char c1 = s[i];
+        char c2 = t[i];
+
+        // Check if there's a mapping from c1 -> c2
+        if (mapST.count(c1)) {
+            if (mapST[c1] != c2) return false; // Inconsistent mapping
+        } else {
+            mapST[c1] = c2; // Create mapping
+        }
+
+        // Check if there's a mapping from c2 -> c1
+        if (mapTS.count(c2)) {
+            if (mapTS[c2] != c1) return false; // Inconsistent mapping
+        } else {
+            mapTS[c2] = c1; // Create mapping
+        }
+    }
+
+    return true; // All mappings are consistent
+}
+};
