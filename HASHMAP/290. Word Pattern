@@ -1,0 +1,43 @@
+class Solution {
+public:
+    bool wordPattern(string pattern, string s) {
+          vector<string> words;
+    stringstream ss(s);
+    string word;
+
+    // Split the string into words
+    while (ss >> word) {
+        words.push_back(word);
+    }
+        
+     if (pattern.size() != words.size()) return false; // Strings of different lengths cannot be isomorphic
+
+    unordered_map<char, string> charToword; // Map from pattern to word
+    unordered_map<string, char> wordTochar; // Map from word to pattern
+
+    for (int i = 0; i < pattern.size(); i++) {
+        char c1 = pattern[i];
+        string c2 = words[i];
+
+        // Check if there's a mapping from c1 -> c2
+        if (charToword.count(c1)) {
+            if (charToword[c1] != c2){
+                 return false;
+                 } // Inconsistent mapping
+        } else {
+            charToword[c1] = c2; // Create mapping
+        }
+
+        // Check if there's a mapping from c2 -> c1
+        if (wordTochar.count(c2)) {
+            if (wordTochar[c2] != c1){ 
+                return false;
+                } // Inconsistent mapping
+        } else {
+            wordTochar[c2] = c1; // Create mapping
+        }
+    }
+
+    return true; // All mappings are consistent
+}
+};
